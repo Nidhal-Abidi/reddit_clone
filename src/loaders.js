@@ -9,3 +9,9 @@ export async function usersLoader({ request: { signal } }) {
   if (resp.ok) return resp.json()
   //throw redirect("/poss")
 }
+
+export async function todosLoader({ request: { signal } }) {
+  const resp = await fetch("http://127.0.0.1:3000/todos?_limit=24", { signal })
+  if (resp.ok) return resp.json()
+  //throw redirect("/poss")
+}
