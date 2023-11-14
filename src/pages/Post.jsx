@@ -2,7 +2,6 @@ import { Link, useLoaderData } from "react-router-dom"
 
 export function Post() {
   const post = useLoaderData()
-  console.log(post)
   return (
     <>
       <h1 className="page-title">{post.title}</h1>
