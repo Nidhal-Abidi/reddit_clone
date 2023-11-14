@@ -1,3 +1,14 @@
+import { useLoaderData } from "react-router-dom"
+import { PostCard } from "../components/PostCard"
+
 export function Posts() {
-  return <h3>Posts</h3>
+  const posts = useLoaderData()
+
+  return (
+    <div className="card-grid">
+      {posts.map((post) => {
+        return <PostCard key={post.id} {...post} />
+      })}
+    </div>
+  )
 }
