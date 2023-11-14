@@ -3,15 +3,29 @@ import { Posts } from "./pages/Posts"
 import { Users } from "./pages/Users"
 import { Todos } from "./pages/Todos"
 import { RootLayout } from "./layouts/RootLayout"
-import { postsLoader, todosLoader, usersLoader } from "./loaders"
+import {
+  postLoader,
+  postsLoader,
+  todosLoader,
+  userLoader,
+  usersLoader,
+} from "./loaders"
+import { Post } from "./pages/Post"
+import { User } from "./pages/User"
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
-      { path: "posts", element: <Posts />, loader: postsLoader },
+      {
+        path: "posts",
+        element: <Posts />,
+        loader: postsLoader,
+      },
+      { path: "posts/:postId", element: <Post />, loader: postLoader },
       { path: "users", element: <Users />, loader: usersLoader },
+      { path: "users/:userId", element: <User />, loader: userLoader },
       { path: "todos", element: <Todos />, loader: todosLoader },
       { path: "*", element: <Navigate to="posts" /> },
     ],

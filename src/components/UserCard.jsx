@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export function UserCard({ name, company, website, email }) {
+export function UserCard({ id, name, company, website, email }) {
   return (
     <div className="card">
       <div className="card-header">{name}</div>
@@ -10,7 +10,7 @@ export function UserCard({ name, company, website, email }) {
         <div>{email}</div>
       </div>
       <div className="card-footer">
-        <Link className="btn" to="#">
+        <Link className="btn" to={`/users/${id}`}>
           View
         </Link>
       </div>
