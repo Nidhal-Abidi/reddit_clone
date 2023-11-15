@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export function PostCard({ title, body }) {
+export function PostCard({ title, body, id }) {
   return (
     <div className="card">
       <div className="card-header">{title}</div>
@@ -8,7 +8,7 @@ export function PostCard({ title, body }) {
         <div className="card-preview-text">{body}</div>
       </div>
       <div className="card-footer">
-        <Link className="btn" to="#">
+        <Link className="btn" to={`${id}`}>
           View
         </Link>
       </div>
