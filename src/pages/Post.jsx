@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, redirect, useLoaderData } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 
 export function Post() {
   const post = useLoaderData()
