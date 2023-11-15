@@ -12,6 +12,7 @@ import {
 } from "./loaders"
 import { Post } from "./pages/Post"
 import { User } from "./pages/User"
+import { ErrorPage } from "./pages/ErrorPage"
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
       { path: "users", element: <Users />, loader: usersLoader },
       { path: "users/:userId", element: <User />, loader: userLoader },
       { path: "todos", element: <Todos />, loader: todosLoader },
+      { path: "error", element: <ErrorPage /> },
       { path: "*", element: <Navigate to="posts" /> },
     ],
   },
