@@ -20,16 +20,21 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: "posts",
-        element: <Posts />,
-        loader: postsLoader,
+        errorElement: <ErrorPage />,
+        children: [
+          { index: true, element: <Navigate to="posts" /> },
+          {
+            path: "posts",
+            element: <Posts />,
+            loader: postsLoader,
+          },
+          { path: "posts/:postId", element: <Post />, loader: postLoader },
+          { path: "users", element: <Users />, loader: usersLoader },
+          { path: "users/:userId", element: <User />, loader: userLoader },
+          { path: "todos", element: <Todos />, loader: todosLoader },
+          { path: "*", element: <ErrorPage /> },
+        ],
       },
-      { path: "posts/:postId", element: <Post />, loader: postLoader },
-      { path: "users", element: <Users />, loader: usersLoader },
-      { path: "users/:userId", element: <User />, loader: userLoader },
-      { path: "todos", element: <Todos />, loader: todosLoader },
-      { path: "error", element: <ErrorPage /> },
-      { path: "*", element: <Navigate to="posts" /> },
     ],
   },
 ])
