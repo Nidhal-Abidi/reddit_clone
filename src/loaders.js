@@ -1,7 +1,20 @@
 //Get all posts
-export async function postsLoader({ request: { signal } }) {
-  const resp = await fetch("http://127.0.0.1:3000/posts?_limit=6", { signal })
-  if (resp.ok) return resp.json()
+export async function postsLoader({ request: { signal, url } }) {
+  const searchParams = new URL(url).searchParams
+  const query = searchParams.get("query") || ""
+  const userId = searchParams.get("userId") || ""
+
+  let endPoint = `http://127.0.0.1:3000/posts?q=${query}`
+  if (userId !== "") {
+    endPoint += `&userId=${userId}`
+  }
+  const resp = await fetch(endPoint, { signal })
+  if (resp.ok) {
+    return {
+      searchParams: { query, userId },
+      posts: await resp.json(),
+    }
+  }
   throw new Error("Cannot fetch all the posts!")
 }
 
@@ -16,7 +29,7 @@ export async function postLoader({ params, request: { signal } }) {
 
 //Get all users
 export async function usersLoader({ request: { signal } }) {
-  const resp = await fetch("http://127.0.0.1:3000/users?_limit=6", { signal })
+  const resp = await fetch("http://127.0.0.1:3000/users", { signal })
   if (resp.ok) return resp.json()
   throw new Error("Cannot fetch all the users!")
 }
@@ -32,7 +45,7 @@ export async function userLoader({ params, request: { signal } }) {
 
 //Get all todos.
 export async function todosLoader({ request: { signal } }) {
-  const resp = await fetch("http://127.0.0.1:3000/todos?_limit=24", { signal })
+  const resp = await fetch("http://127.0.0.1:3000/todos", { signal })
   if (resp.ok) return resp.json()
   throw new Error(`Cannot fetch all the todos!`)
 }

@@ -13,6 +13,8 @@ import {
 import { Post } from "./pages/Post"
 import { User } from "./pages/User"
 import { ErrorPage } from "./pages/ErrorPage"
+import { NewPost, newPostAction } from "./pages/NewPost"
+import { EditPost, editPostAction } from "./pages/EditPost"
 
 export const router = createBrowserRouter([
   {
@@ -25,10 +27,22 @@ export const router = createBrowserRouter([
           { index: true, element: <Navigate to="posts" /> },
           {
             path: "posts",
-            element: <Posts />,
-            loader: postsLoader,
+            children: [
+              {
+                index: true,
+                element: <Posts />,
+                loader: postsLoader,
+              },
+              { path: ":postId", element: <Post />, loader: postLoader },
+              { path: "new", element: <NewPost />, action: newPostAction },
+              {
+                path: ":postId/edit",
+                element: <EditPost />,
+                loader: postLoader,
+                action: editPostAction,
+              },
+            ],
           },
-          { path: "posts/:postId", element: <Post />, loader: postLoader },
           { path: "users", element: <Users />, loader: usersLoader },
           { path: "users/:userId", element: <User />, loader: userLoader },
           { path: "todos", element: <Todos />, loader: todosLoader },
