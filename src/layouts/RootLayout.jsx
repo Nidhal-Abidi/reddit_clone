@@ -5,7 +5,7 @@ export function RootLayout() {
   return (
     <>
       <nav className="top-nav">
-        <div className="nav-text-large">My App</div>
+        <div className="nav-text-large">CommunityPost</div>
         <ul className="nav-list">
           <li>
             <Link to="posts">Posts</Link>
